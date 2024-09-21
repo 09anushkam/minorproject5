@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'product_list_screen.dart'; // Import the ProductListScreen
 
 class ShopDetailsScreen extends StatefulWidget {
   @override
@@ -24,7 +25,15 @@ class _ShopDetailsScreenState extends State<ShopDetailsScreen> {
   void _saveShopDetails() {
     if (_formKey.currentState!.validate()) {
       // Save the shop details
-      // Navigate to AddProductScreen after saving shop details
+      String shopName = _nameController.text; // Get the shop name
+
+      // Navigate to ProductListScreen and pass the shop name
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProductListScreen(products: [], shopName: shopName),
+        ),
+      );
       Navigator.pushNamed(context, '/add-product');
     }
   }
