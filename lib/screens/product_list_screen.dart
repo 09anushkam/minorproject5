@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import '../models/product_model.dart';
 import 'add_product_screen.dart'; // Import your AddProductScreen here
+import 'shop_created_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   final List<Product> products;
@@ -43,7 +44,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   ? Icon(Icons.image, size: 50)
                   : Image.file(File(product.imageUrl), width: 50, height: 50, fit: BoxFit.cover),
               title: Text(product.name),
-              subtitle: Text('${product.category} - \$Rs.{product.price}'),
+              subtitle: Text('${product.category} - Rs. ${product.price}'),
               trailing: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -67,8 +68,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+        // child: Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -83,7 +84,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green, // Green button
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                  // padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -98,10 +99,20 @@ class _ProductListScreenState extends State<ProductListScreen> {
               ElevatedButton(
                 onPressed: () {
                   // Add logic for Save & Next action
+                  // Navigate to ShopCreatedScreen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ShopCreatedScreen(
+                        products: widget.products,
+                        shopName: widget.shopName,
+                      ),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green, // Green button
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                  // padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -113,7 +124,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               ),
             ],
           ),
-        ),
+        // ),
       ),
     );
   }
